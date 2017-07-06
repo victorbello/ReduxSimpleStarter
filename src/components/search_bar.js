@@ -1,9 +1,13 @@
 import React from 'react';
 
 class SearchBar extends React.Component {
+  state = {
+    input: ''
+  }
+
   render() {
     return (
-      <input />
+      <input onChange={event => console.log(event.target.value)} />
     );
   }
 }
