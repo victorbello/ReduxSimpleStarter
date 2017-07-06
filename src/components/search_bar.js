@@ -2,12 +2,14 @@ import React from 'react';
 
 class SearchBar extends React.Component {
   state = {
-    input: ''
+    term: ''
   }
 
   render() {
     return (
-      <input onChange={event => console.log(event.target.value)} />
+      <div>
+        <input onChange={event => this.setState({term: event.target.value})} />
+      </div>
     );
   }
 }
