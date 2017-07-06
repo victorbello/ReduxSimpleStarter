@@ -16,19 +16,23 @@ class App extends React.Component {
       selectedVideo: null
     };
 
-    YTSearch({key: API_KEY, term: 'Faraday Future'}, (videos) => {
-      this.setState({ videos, selectedVideo: videos[0] });
-    });
+    this.videoSearch('surfboards');
   }
 
+  videoSearch = term => {
+    YTSearch({ key: API_KEY, term }, videos => {
+      this.setState({ videos, selectedVideo: videos[0] });
+    });
+  };
+
   render() {
-    if(this.state.videos.length === 0) return <div>Loading</div>;
+    if (this.state.videos.length === 0) return <div>Loading</div>;
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
-          onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
+          onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
           videos={this.state.videos}
         />
       </div>
