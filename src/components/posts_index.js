@@ -9,11 +9,24 @@ class PostsIndex extends Component {
     this.props.fetchPosts();
   }
 
+  renderPosts() {
+    return _.map(this.props.posts, ({ id, title, content }) => {
+      return (
+        <li key={id} className="list-group-item">
+          {title}
+        </li>
+      );
+    });
+  }
+
   render() {
-    console.log(this.props.posts);
+    if(!this.props.posts) return <div>Loading</div>;
     return (
       <div>
-        Posts Index
+        <h3>Posts</h3>
+        <ul className="list-group">
+          {this.renderPosts()}
+        </ul>
       </div>
     );
   }
