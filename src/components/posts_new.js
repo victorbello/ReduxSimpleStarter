@@ -2,21 +2,24 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 class PostsNew extends React.Component {
-  renderField = field => {
+  renderField = ({ meta: { touched, error }, label, input }) => {
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
     return (
-      <div className="form-group">
+      <div className={className}>
         <label>
-          {field.label}
+          {label}
         </label>
-        <input className="form-control" type="text" {...field.input} />
-        {field.meta.error}
+        <input className="form-control" type="text" {...input} />
+        <div className="text-help">
+          {touched ? error : ''}
+        </div>
       </div>
     );
   };
 
   onSubmit = values => {
     console.log(values);
-  }
+  };
 
   render() {
     const { handleSubmit } = this.props;
